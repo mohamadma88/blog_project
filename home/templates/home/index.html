@@ -114,7 +114,7 @@
                 </a>
                 <p class="tag-list-inline">Tag: <a href="#">{{ article.category.first.title }}</a></p>
                 <p>{{ article.body }}</p>
-                <a class="button" href="#">Read More <i class="ti-arrow-right"></i></a>
+                <a class="button" href="{% url 'detail:article' article.slug %}">Read More <i class="ti-arrow-right"></i></a>
               </div>
             </div>
           {% endfor %}

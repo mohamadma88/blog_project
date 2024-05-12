@@ -48,10 +48,5 @@ class Contact(models.Model):
         return self.name
 
 
-class Comments(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
-    parents = models.ForeignKey('self', on_delete=models.CASCADE, related_name='reply', blank=True, null=True)
-    body = models.TextField(null=True, blank=True)
-    create = models.DateTimeField(auto_now_add=True)
+
 
