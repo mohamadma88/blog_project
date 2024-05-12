@@ -1,0 +1,24 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% include 'include/header.html' %}
+</head>
+
+
+
+  <header class="header_area">
+   {% include 'include/header_reference.html' %}
+  </header>
+
+{% block content %}
+
+{% endblock %}
+
+  <footer class="footer-area section-padding">
+    {% include 'include/footer.html' %}
+  </footer>
+  <!--================ End Footer Area =================-->
+
+{% include 'include/footer_reference.html' %}

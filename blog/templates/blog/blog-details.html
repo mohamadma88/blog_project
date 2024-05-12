@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<body>
+
+  <!--================Header Menu Area =================-->
+  
+  <!--================ Hero sm Banner start =================-->      
+  <section class="mb-30px">
+    <div class="container">
+      <div class="hero-banner hero-banner--sm">
+        <div class="hero-banner__content">
+          <h1>Blog details</h1>
+          <nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Blog Details</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================ Hero sm Banner end =================-->    
+
+
+  
+
+  <!--================ Start Blog Post Area =================-->
+  <section class="blog-post-area section-margin">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+
+
+
+            <div class="main_blog_details">
+                <img class="img-fluid" src="{{ detail_post.img.url }}" alt="">
+                <a href="#"><h4>{{ detail.title }} <br /> A Discount Toner</h4></a>
+                <div class="user_details">
+                  <div class="float-left">
+                    <a href="#">{{ detail.category.first }}</a>
+                      <p></p>
+                  </div>
+                  <div class="float-right mt-sm-0 mt-3">
+                    <div class="media">
+                      <div class="media-body">
+                        <h5>{{ detail.auth }}</h5>
+                        <p>{{ detail.created_at }}</p>
+                      </div>
+
+                      <div class="d-flex">
+                        <img width="42" height="42" src="img/blog/user-img.png" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p>{{ detail.body }}</p>
+
+                {% if detail.quote %}
+           <blockquote class="blockquote">
+             <p class="mb-0">{{ detail.quote }}</p>
+           </blockquote>
+                {% endif %}
+               <div class="news_d_footer flex-column flex-sm-row">
+                 <a href="#"><span class="align-middle mr-2"><i class="ti-heart"></i></span>Lily and 4 people like this</a>
+                 <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><span class="align-middle mr-2"><i class="ti-themify-favicon"></i></span>06 Comments</a>
+                 <div class="news_socail ml-sm-auto mt-sm-0 mt-2">
+               <a href="#"><i class="fab fa-facebook-f"></i></a>
+               <a href="#"><i class="fab fa-twitter"></i></a>
+               <a href="#"><i class="fab fa-dribbble"></i></a>
+               <a href="#"><i class="fab fa-behance"></i></a>
+             </div>
+               </div>
+              </div>
+
+          
+
+          <div class="navigation-area">
+                  <div class="row">
+                      <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                          <div class="thumb">
+                              <a href="#"><img class="img-fluid" src="img/blog/prev.jpg" alt=""></a>
+                          </div>
+                          <div class="arrow">
+                              <a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
+                          </div>
+
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+                          <div class="arrow">
+                              <a href="#"><span class="lnr text-white lnr-arrow-right"></span></a>
+                          </div>
+                          <div class="thumb">
+                              <a href="#"><img class="img-fluid" src="img/blog/next.jpg" alt=""></a>
+                          </div>										
+                      </div>									
+                  </div>
+                </div>
+
+                <div class="comments-area">
+                    <h4>05 Comments</h4>
+                    <div class="comment-list">
+                        {% for comments in detail.comments.all %}
+                            {% if comments.parents == None %}
+
+                        <div class="single-comment justify-content-between d-flex">
+                            <div class="user justify-content-between d-flex">
+                                <div class="thumb">
+                                    <img src="img/blog/c1.jpg" alt="">
+                                </div>
+                                <div class="desc">
+                                    <h5><a href="#">{{ comments.user.get_full_name }}</a></h5>
+
+                                    <p class="date">{{ comments.create }} </p>
+                                    <p class="comment">
+                                        {{ comments.body }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="reply-btn">
+                                    <a href="" class="btn-reply text-uppercase">reply</a> 
+                            </div>
+                        </div>
+                    </div>
+                    {% for reply in comments.reply.all %}
+                    <div class="comment-list left-padding">
+                        <div class="single-comment justify-content-between d-flex">
+                            <div class="user justify-content-between d-flex">
+                                <div class="thumb">
+                                    <img src="img/blog/c2.jpg" alt="">
+                                </div>
+                                <div class="desc">
+                                    <h5><a href="#"> {{ reply.user.get_full_name }}</a></h5>
+                                    <p class="date">{{ reply.create }} </p>
+                                    <p class="comment">
+                                        {{ reply.body }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="reply-btn">
+                                    <a href="" class="btn-reply text-uppercase">reply</a> 
+                            </div>
+                        </div>
+                    </div>
+                                {% endfor %}
+                             {% endif %}
+                        {% endfor %}
+                </div>
+                <div class="comment-form"  >
+                    <h4>Leave a Reply</h4>
+                    <form method="post">
+                        {% csrf_token %}
+                        <form action="#/" class="form-contact contact_form" method="post" id="contactForm" novalidate="novalidate">
+
+                         <div class="form-group">
+                         <textarea class="form-control different-control w-100" name="message" id="message" cols="30" rows="5" placeholder="Enter Message"></textarea>
+                        </div>
+                        <div class="form-group text-center text-md-right mt-3">
+              <button type="submit" class="button button--active button-contactForm">Send Message</button>
+            </div>
+                    </form>
+                </div>
+        </div>
+
+        <!-- Start Blog Post Siddebar -->
+
+{% include 'include/sidebar.html' %}
+          </div>
+        <!-- End Blog Post Siddebar -->
+      </div>
+  </section>
+  <!--================ End Blog Post Area =================-->
+
+  <!--================ Start Footer Area =================-->
+{% endblock %}

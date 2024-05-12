@@ -1,0 +1,43 @@
+ {% load static %}
+ {% load social_share %}
+
+<div class="main_menu">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container box_1620">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <a class="navbar-brand logo_h" href="index.html"><img src="{% static 'img/logo.png' %}" alt=""></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+            <ul class="nav navbar-nav menu_nav justify-content-center">
+
+              <li class="nav-item {% if request.resolver_match.url_name == 'landing' %} active {% endif %}">
+                <a class="nav-link" href="{% url 'home:landing' %}">Home</a>
+                </li>
+
+
+              <li class="nav-item {% if request.resolver_match.url_name == 'list' %}active{% endif %} ">
+                  <a class="nav-link" href="{% url 'detail:list' %}">Article List</a>
+              </li>
+
+                  <li class="nav-item {% if request.resolver_match.url_name == '' %}active{% endif %} ">
+                      <a class="nav-link" href="{% url 'detail:list' %}">Blog Details</a>
+                  </li>
+
+              <li class="nav-item {% if request.resolver_match.url_name == 'contact' %}active{% endif %} ">
+                  <a class="nav-link" href="{% url 'detail:contact' %}">Contact</a></li>
+            </ul>
+            <ul class="nav  navbar-right navbar-social">
+                <li> {% post_to_facebook 'facebook' '   ' 'ti-facebook' %}</li>
+                <li> {% post_to_twitter 'twitter' '' ' ' 'ti-twitter' %}</li>
+                <li>{% post_to_linkedin 'linkdin' '' %}</li>
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
