@@ -1,12 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from blog.forms import ContactForm, MessageForm
-from blog.models import Article
+from blog.models import Article , Comment
 from django.views.generic import DetailView, ListView
 
 
 def post_detail(request, slug):
     detail = get_object_or_404(Article, slug=slug)
-
+    if request.method == 'POST':
+        text = request.POST.get('text')
+        Comment.objects.create(text=text, user=request.user, article=detail)
     return render(request, 'blog/blog-details.html', {'detail': detail})
 
 
